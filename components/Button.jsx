@@ -1,12 +1,11 @@
-const Button = () => {
+const Button = () => (
   <button
-  type="button"
+    type="button"
     className="nft-gradient"
 
   >
-   Button
+    Button
   </button>
-  )
-}
+);
 
-export default Button
+export default Button;

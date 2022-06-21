@@ -4,7 +4,8 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Button from '.';
+import images from '../assets';
+import { Button } from '.';
 
 const MenuItems = ({ isMobile, active, setActive }) => {
   const generateLink = (i) => {
