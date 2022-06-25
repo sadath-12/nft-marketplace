@@ -116,7 +116,7 @@ return ()=>{
                 )}
               </div>
             </div>
-          </div> 
+          </div>
 
           <div className="mt-10">
             <div className="flexBetween mx-4 xs:mx-0 minlg:mx-8 sm:flex-col sm:items-start">
@@ -132,7 +132,7 @@ return ()=>{
                   nft={{
                     i,
                     name: `Nifty NFT ${i}`,
-                    price:(10-i*0.534).toFixed(2),
+                    price: (10 - i * 0.534).toFixed(2),
                     seller: `0x${makeId(3)}....${makeId(3)}`,
                     owner: `0x${makeId(3)}....${makeId(3)}`,
                     description: "Cool NFT on sale",
