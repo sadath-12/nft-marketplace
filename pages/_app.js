@@ -1,8 +1,8 @@
-import Script from 'next/script';
-import { ThemeProvider } from 'next-themes';
-
-import { Navbar, Footer } from '../components';
-import '../styles/globals.css';
+import { ThemeProvider } from "next-themes";
+import Script from "next/script";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => (
   <ThemeProvider attribute="class">
@@ -13,8 +13,11 @@ const MyApp = ({ Component, pageProps }) => (
       </div>
       <Footer />
     </div>
-
-    <Script src="https://kit.fontawesome.com/804575f986.js" crossOrigin="anonymous" />
+    {/* to access font awsm  */}
+    <Script
+      src="https://kit.fontawesome.com/804575f986.js"
+      crossOrigin="anonymous"
+    />
   </ThemeProvider>
 );
 
