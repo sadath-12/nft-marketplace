@@ -1,27 +1,54 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import images from "../assets";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import {Input,Button} from "../components";
+import { NFTContext } from "../context/NFTContext";
+import { useRouter } from "next/router";
+import { create as ipfsHttpClient } from "ipfs-http-client";
 
 const CreateNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
   const [formInput,setFormInput]=useState({price:'',name:'',description:''})
   const { theme } = useTheme();
+  const {uploadToInfura,createNFT}=useContext(NFTContext)
+
+//  const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+
+//     const uploadToInfura = async (file) => {
+//       try {
+//         const added = await client.add({ content: file });
+
+//         const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+
+//         setFileUrl(url);
+//       } catch (error) {
+//         console.log("Error uploading file: ", error);
+//       }
+//     };
+
+//     console.log(fileUrl)
 
   //useCallback will memory the returned value while use useMemo memorise the function
+ const onDrop = useCallback(async (acceptedFile) => {
+ const url=  await uploadToInfura(acceptedFile[0]);
+ setFileUrl(url)
+ }, []);
 
-  const onDrop=useCallback(()=>{
-    // upload image to the ipfs
+   const {
+     getRootProps,
+     getInputProps,
+     isDragActive,
+     isDragAccept,
+     isDragReject,
+   } = useDropzone({
+     onDrop,
+     accept: "image/*",
+     maxSize: 5000000,
+   });
 
-  },[])
-
-  const {getRootProps,getInputProps,isDragActive,isDragAccept,isDragReject}=useDropzone({
-    onDrop,
-    accept:'image/*',
-    maxSize:5000000,
-  })
+   const router = useRouter()
 
   const fileStyle = useMemo(
     () =>
@@ -110,7 +137,9 @@ const CreateNFT = () => {
           <Button
             btnName="Create NFT"
             classStyles="rounded-xl"
-            handleClick={() => {}}
+            handleClick={() => {
+              createNFT(formInput, fileUrl, router);
+            }}
           />
         </div>
       </div>
